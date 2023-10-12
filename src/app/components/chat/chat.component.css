@@ -1,0 +1,100 @@
+.cardContainer {
+    width: 800px;
+    height: 600px;
+}
+
+.card-header {
+    background-color: #b987e1;
+    color: white;
+    font-weight: 700;
+}
+
+.card-body {
+    padding: 0.5rem;
+    overflow: scroll;
+    background-color: #ece5dd;
+    /*background-image: ;*/
+
+}
+
+.imgEnviar:active {
+    transform: scale(0.9);
+}
+
+.enviado {
+    display: block;
+    float: right;
+    background-color: forestgreen;
+    color: white;
+    min-width: 50.01%;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.recibido {
+    display: block;
+    float: left;
+    background-color: gray;
+    color: white;
+    min-width: 50.01%;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.contenedorMensajes {
+    padding: 0.3rem;
+}
+
+.contenedorMensajes > :first-child {
+    margin-top: auto;
+}
+
+.card-body::-webkit-scrollbar {
+    display: none;
+}
+
+.chat-bubble-container {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+}
+
+.chat-bubble-container.sender {
+    justify-content: flex-end;
+}
+
+.chat-bubble-container.sender > .chat-bubble {
+    background: #005d4b;
+}
+
+.chat-bubble {
+    background: #474747;
+    color: white;
+    font-weight: 500;
+    padding-top: 20px;
+    padding-bottom: 18px;
+    padding-left: 8px;
+    padding-right: 100px;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    width: fit-content;
+
+    position: relative;
+}
+
+.chat-bubble > .chat-date {
+    position: absolute;
+    color: #e0e0e0;
+    bottom: 2px;
+    right: 8px;
+    font-size: 0.7rem;
+}
+
+.chat-bubble > .chat-user {
+    position: absolute;
+    color: #74a9ea;
+    font-weight: 500;
+    top: 2px;
+    left: 8px;
+    font-size: 0.7rem;
+}

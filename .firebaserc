@@ -1,14 +1,14 @@
 {
   "targets": {
-    "labo4-c1-2023": {
+    "salajuegos-2048a": {
       "hosting": {
         "salaJuegos": [
-          "santiagofossa-salajuegos"
+          "santiagofossa-saladejuegos"
         ]
       }
     }
   },
   "projects": {
-    "default": "labo4-c1-2023"
+    "default": "salajuegos-2048a"
   }
 }

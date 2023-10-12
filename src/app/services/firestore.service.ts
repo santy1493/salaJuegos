@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Firestore, collection, addDoc, collectionData, doc, deleteDoc, query, where } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Log } from '../models/log';
+import { Mensaje } from '../models/mensaje';
 
 
 @Injectable({
@@ -18,6 +19,19 @@ export class FirestoreService {
     return addDoc(logRef, log).catch(err => {
       console.log(err);
     });
+  }
+
+  agregarMensaje(mensaje: Mensaje) {
+    const mensajeRef = collection(this.firestore, 'mensajes');
+    return addDoc(mensajeRef, mensaje).catch(err => {
+      console.log(err);
+    });
+  }
+
+  obtenerMensajes(): Observable<Mensaje[]> {
+    console.log(this.firestore);
+    const mensajesRef = collection(this.firestore, 'mensajes');
+    return collectionData(mensajesRef, { idField: 'id'}) as Observable<Mensaje[]>;
   }
 
   /*obtenerPublicaciones(): Observable<Publicacion[]> {
