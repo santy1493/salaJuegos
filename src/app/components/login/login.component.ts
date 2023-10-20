@@ -66,12 +66,13 @@ export class LoginComponent implements OnInit {
   }
   
   
-  completarLogin() {
+  completarLogin(nombre: string) {
     if(this.form.controls['email']) {
-      this.form.controls['email'].setValue('test@test.com');
+      let correo = nombre + '@gmail.com'
+      this.form.controls['email'].setValue(correo);
     }
     if(this.form.controls['password']) {
-      this.form.controls['password'].setValue('111111');
+      this.form.controls['password'].setValue('123456');
     }
   }
 

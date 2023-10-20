@@ -23,6 +23,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MayorMenorComponent } from './components/mayor-menor/mayor-menor.component';
 import { ToastrModule } from 'ngx-toastr';
 import { JuegosComponent } from './components/juegos/juegos.component';
+import { AhorcadoComponent } from './components/ahorcado/ahorcado.component';
+import { HttpClientModule } from '@angular/common/http';
+import { PreguntadosComponent } from './components/preguntados/preguntados.component'
 
 @NgModule({
   declarations: [
@@ -32,7 +35,9 @@ import { JuegosComponent } from './components/juegos/juegos.component';
     RegistroComponent,
     ChatComponent,
     MayorMenorComponent,
-    JuegosComponent
+    JuegosComponent,
+    AhorcadoComponent,
+    PreguntadosComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +50,8 @@ import { JuegosComponent } from './components/juegos/juegos.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatSlideToggleModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

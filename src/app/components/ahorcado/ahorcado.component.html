@@ -1,0 +1,48 @@
+
+<div class="ahorcadoContainer">
+
+    <div class="ahorcadoDisplay">
+        <img [src]="ahorcadoImg" alt="" width="200px" style="border-radius: 10px;">
+        <h3 class="erroresRestantes" *ngIf="!perdido && !ganado">Errores restantes: {{ MAX_ERRORES - letraErroneas }}</h3>
+    </div>
+
+    
+
+    <div class="caracteres">
+        <div class="caracter" *ngFor="let letra of letrasPalabra">
+            <div class="caracter-nombre">
+                {{ letra.adivinado ? letra.letra.toUpperCase() : '' }}
+            </div>
+        </div>
+    </div>
+
+    <div class="keyboard" *ngIf="!perdido && !ganado">
+        <div class="keys">
+            <div class="key-btn" (click)="onKeyClick(caracter)" *ngFor="let caracter of caracteres" [class.key-btn--disabled]="caracter.usado">
+                {{ caracter.valor }}
+            </div>
+        </div>
+    </div>
+
+
+    <div class="juegoTerminado"  *ngIf="perdido">
+        <div>
+            <h1 style="font-size: 36px; color: maroon;">Perdiste...</h1>
+        </div>
+        <div>
+            <button class="btn btn-primary btn-lg" (click)="reiniciar()">Reiniciar</button>
+        </div>
+        
+    </div>
+
+    <div class="juegoTerminado"  *ngIf="ganado">
+        <div>
+            <h1 style="font-size: 36px; color: forestgreen;">Ganaste!!</h1>
+        </div>
+        <div>
+            <button class="btn btn-primary btn-lg" (click)="reiniciar()">Reiniciar</button>
+        </div>
+        
+    </div>
+
+</div>

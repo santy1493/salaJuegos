@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-mayor-menor',
@@ -66,7 +66,7 @@ export class MayorMenorComponent implements OnInit {
   ]
 
   constructor(
-    private toastr: ToastrService
+    private toast: ToastService
   ) { }
 
   ngOnInit(): void {
@@ -112,14 +112,19 @@ export class MayorMenorComponent implements OnInit {
     this.imgCartaActual = cartaActual.imagen;
 
     if(numCartaActual > this.cartaAnterior && this.esMayor == true) {
+      this.toast.showSuccess('Correcto!');
       this.puntos++;
     }
     else if(numCartaActual > this.cartaAnterior && this.esMayor == false) {
+      this.toast.showError('Incorrecto');
     }
     else if(numCartaActual < this.cartaAnterior && this.esMayor == false) {
+      this.toast.showSuccess('Correcto!');
       this.puntos++;
+
     }
     else if(numCartaActual < this.cartaAnterior && this.esMayor == true) {
+      this.toast.showError('Incorrecto');
     }
 
     this.cartaAnterior = numCartaActual;
