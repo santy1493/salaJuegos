@@ -9,6 +9,7 @@ import { MayorMenorComponent } from './components/mayor-menor/mayor-menor.compon
 import { JuegosComponent } from './components/juegos/juegos.component';
 import { AhorcadoComponent } from './components/ahorcado/ahorcado.component';
 import { PreguntadosComponent } from './components/preguntados/preguntados.component';
+import { PongComponent } from './pong/pong.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
@@ -66,6 +67,12 @@ const routes: Routes = [
     canActivate: [ AuthGuard ],
     data: { authGuardPipe: redirectUnauthorizedToLogin },
     component: PreguntadosComponent
+  },
+  {
+    path: 'pong',
+    canActivate: [ AuthGuard ],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
+    component: PongComponent
   },
   { 
     path: '**',

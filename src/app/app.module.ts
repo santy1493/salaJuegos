@@ -25,7 +25,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { JuegosComponent } from './components/juegos/juegos.component';
 import { AhorcadoComponent } from './components/ahorcado/ahorcado.component';
 import { HttpClientModule } from '@angular/common/http';
-import { PreguntadosComponent } from './components/preguntados/preguntados.component'
+import { PreguntadosComponent } from './components/preguntados/preguntados.component';
+import { PongComponent } from './pong/pong.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { PreguntadosComponent } from './components/preguntados/preguntados.compo
     MayorMenorComponent,
     JuegosComponent,
     AhorcadoComponent,
-    PreguntadosComponent
+    PreguntadosComponent,
+    PongComponent
   ],
   imports: [
     BrowserModule,
