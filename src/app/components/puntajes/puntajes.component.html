@@ -1,17 +1,18 @@
-<div class="container">
+<div class="puntajesContainer">
+  <div class="container">
     <div class="row">
         <div class="col-3 py-5">
             <div class="d-grid gap-2 col-6 my-3 mx-auto">
-                <button class="btn btn-secondary" type="button" (click)="cambiarTabla(1)">Ahorcado</button>
+                <button class="btn btn-outline-primary" type="button" (click)="cambiarTabla(1)">Ahorcado</button>
             </div>
             <div class="d-grid gap-2 col-6 my-3 mx-auto">
-                <button class="btn btn-secondary" type="button" (click)="cambiarTabla(2)">Mayor o Menor</button>
+                <button class="btn btn-outline-primary" type="button" (click)="cambiarTabla(2)">Mayor o Menor</button>
             </div>
             <div class="d-grid gap-2 col-6 my-3 mx-auto">
-                <button class="btn btn-secondary" type="button" (click)="cambiarTabla(3)">Preguntados</button>
+                <button class="btn btn-outline-primary" type="button" (click)="cambiarTabla(3)">Preguntados</button>
             </div>
             <div class="d-grid gap-2 col-6 my-3 mx-auto">
-                <button class="btn btn-secondary" type="button" (click)="cambiarTabla(4)">Pong</button>
+                <button class="btn btn-outline-primary" type="button" (click)="cambiarTabla(4)">Pong</button>
             </div>
         </div>
         <div class="col-9 table-responsive py-5 text-center" *ngIf="ahorcado">
@@ -100,4 +101,5 @@
               </table>
           </div>
     </div>
+  </div>
 </div>

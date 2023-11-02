@@ -191,14 +191,16 @@ firstPlay = true;
       }
       if(this.ballX <= 0){
           this.player2Score+=1;
-          this.gameState = 'completed';
+          if(this.gameState != 'saved')
+            this.gameState = 'completed';
           /*this.updateScore();
           this.createBall();*/
           return;
       }
       if(this.ballX >= this.gameWidth){
           this.player1Score+=1;
-          this.gameState = 'completed';
+          if(this.gameState != 'saved')
+            this.gameState = 'completed';
           /*this.updateScore();
           this.createBall();*/
           return;
@@ -299,6 +301,9 @@ formatTimeParam(time: number) {
 }
 
 guardarResultado() {
+
+    this.gameState = 'saved';
+
     var today = new Date();
       var date = today.toLocaleString('en-GB');
 
@@ -310,7 +315,8 @@ guardarResultado() {
         }
         console.log(puntajeFinal);
         this.firestore.agregarPuntajePong(puntajeFinal);
-        this.gameState = 'saved';
+
+        console.log(this.gameState);
       });
   }
 

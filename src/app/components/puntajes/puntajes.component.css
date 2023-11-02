@@ -1,0 +1,15 @@
+.puntajesContainer {
+    width: 100%;
+    height: 100%;
+    background-color: darkorange;
+}
+
+table {
+    background-color: antiquewhite;
+}
+
+h1 {
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 35px; 
+    color: rgb(0, 125, 213);
+}
