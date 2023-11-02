@@ -1,32 +1,36 @@
 <div class="preguntadosContainer">
-      <h1>puntaje: {{ puntaje }}</h1>
-
-      <div class="d-grid gap-2 col-4 mx-auto" style="background-color: white; height: 50%; border-radius: 20px; margin-bottom: 20px;">
-    <div class="text-center" style="margin: 30px auto;">
-        <img [src]="'https://image.tmdb.org/t/p/w500' + preguntaActual.imagen" class="peliculaImg rounded" alt="...">
-        <h2>¿Cual es el nombre de la pelicula?</h2>
-      </div>
-      </div>
-    
-    <!--<div class="respuestas">
-        <button *ngFor="let opcion of preguntaActual.opciones" (click)="elegirOpcion(opcion)"
-        [disabled]="preguntaActual.respondida"
-        [class.boton-correcto]="opcion.correcto"
-        [class.boton-incorrecto]="opcion.incorrecto"
-        >{{ opcion.titulo }}</button>
-    </div>-->
-    
-    <div class="d-grid gap-2 col-4 mx-auto">
-        <button class="btn btn-secondary" type="button"
-        *ngFor="let opcion of preguntaActual.opciones"
-        (click)="elegirOpcion(opcion)"
-        [disabled]="preguntaActual.respondida"
-        [class.boton-correcto]="opcion.correcto"
-        [class.boton-incorrecto]="opcion.incorrecto"
-        >{{ opcion.titulo }}</button>
-      </div>
-    
-      <div class="d-grid gap-2 col-1 mx-auto" *ngIf="preguntaActual.respondida" style="margin-top: 30px;">
-        <button class="btn btn-warning" type="button" (click)="elegirPelicula()">Siguiente</button>
-      </div>
+  <div class="juegoContainer">
+    <div class="d-grid gap-2 col-6 mx-auto puntaje" >
+      <h1 class="puntajeH1">Intentos: 0  - Aciertos: {{ puntaje }}</h1>
+  </div>
+    <div class="d-grid gap-2 col-6 mx-auto" style="background-color: white; height: 50%; border-radius: 20px; margin-bottom: 20px;">
+      <div class="text-center" style="margin: 30px auto;">
+          <img [src]="'https://image.tmdb.org/t/p/w500' + preguntaActual.imagen" class="peliculaImg rounded" alt="...">
+          <h2>¿Cual es el nombre de la pelicula?</h2>
+        </div>
+        </div>
+      
+      <!--<div class="respuestas">
+          <button *ngFor="let opcion of preguntaActual.opciones" (click)="elegirOpcion(opcion)"
+          [disabled]="preguntaActual.respondida"
+          [class.boton-correcto]="opcion.correcto"
+          [class.boton-incorrecto]="opcion.incorrecto"
+          >{{ opcion.titulo }}</button>
+      </div>-->
+      
+      <div class="d-grid gap-2 col-6 mx-auto">
+          <button class="btn btn-secondary" type="button"
+          *ngFor="let opcion of preguntaActual.opciones"
+          (click)="elegirOpcion(opcion)"
+          [disabled]="preguntaActual.respondida"
+          [class.boton-correcto]="opcion.correcto"
+          [class.boton-incorrecto]="opcion.incorrecto"
+          >{{ opcion.titulo }}</button>
+        </div>
+      
+        <div class="d-grid gap-2 col-1 mx-auto" *ngIf="preguntaActual.respondida" style="margin-top: 30px;">
+          <button class="btn btn-warning" type="button" (click)="elegirPelicula()">Siguiente</button>
+        </div>
+  </div>
+      
   </div>

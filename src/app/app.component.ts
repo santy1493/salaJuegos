@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
+import { FirestoreService } from './services/firestore.service';
 
 @Component({
   selector: 'app-root',
@@ -14,14 +15,26 @@ export class AppComponent implements OnInit {
   );
   
   isLoggedIn: boolean;
+  esAdmin: boolean = false;
 
   constructor(
     private auth: AuthService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private firestore: FirestoreService
+  ) {}
 
-  ngOnInit(): void {
-
+  async ngOnInit()  {
+    
+    this.auth.authState$.subscribe(res => {
+      if(res != null ) {
+        this.firestore.obtenerUsuario(res.email).subscribe(res => {
+          if(res[0].rol == 'admin') {
+            this.esAdmin = true;
+          }
+        });
+      }
+    })
+    
   }
 
   async logout() {

@@ -27,6 +27,7 @@ import { AhorcadoComponent } from './components/ahorcado/ahorcado.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PreguntadosComponent } from './components/preguntados/preguntados.component';
 import { PongComponent } from './pong/pong.component';
+import { EncuestaComponent } from './components/encuesta/encuesta.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { PongComponent } from './pong/pong.component';
     JuegosComponent,
     AhorcadoComponent,
     PreguntadosComponent,
-    PongComponent
+    PongComponent,
+    EncuestaComponent
   ],
   imports: [
     BrowserModule,

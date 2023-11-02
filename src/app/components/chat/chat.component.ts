@@ -41,20 +41,21 @@ export class ChatComponent implements OnInit {
 
   enviarMensaje() {
 
-    let mensaje: Mensaje = {
-      usuario: this.currentUser,
-      timespan: Date.now(),
-      mensaje: this.nuevoMensaje
+    if(this.nuevoMensaje != '') {
+      let mensaje: Mensaje = {
+        usuario: this.currentUser,
+        timespan: Date.now(),
+        mensaje: this.nuevoMensaje
+      }
+  
+      this.firestore.agregarMensaje(mensaje);
+  
+      this.nuevoMensaje = "";
+  
+      setTimeout(() => {
+        this.scroll();
+      }, 200);
     }
-
-    this.firestore.agregarMensaje(mensaje);
-
-    this.nuevoMensaje = "";
-
-    setTimeout(() => {
-      this.scroll();
-    }, 200);
-
     //console.log(this.nuevoMensaje);
   }
 

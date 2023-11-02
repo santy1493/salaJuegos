@@ -17,6 +17,10 @@
 
 }
 
+.imgEnviar {
+   width: 35px;
+   margin-left: 5px;
+}
 .imgEnviar:active {
     transform: scale(0.9);
 }
@@ -97,4 +101,13 @@
     top: 2px;
     left: 8px;
     font-size: 0.7rem;
+}
+
+.chatContainer {
+    width: 100%;
+    height: calc(100% - 70px);
+    background-color: #710cec;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

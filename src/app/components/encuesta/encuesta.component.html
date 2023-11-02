@@ -1,0 +1,80 @@
+<div *ngIf="!encuestaEnviada" class="container col-5">
+    <form [formGroup]="form" (ngSubmit)="enviarEncuesta()">
+        <div class="form-group mb-3">
+          <label class="formLabel" for="nombre">Nombre</label>
+          <input formControlName="nombre" type="text" class="form-control" id="nombre" placeholder="Juan">
+          <span *ngIf="form.get('nombre').hasError('required') && form.get('nombre').touched" class="text-danger error-labe">* Requerido</span>
+          <span *ngIf="form.get('nombre').hasError('pattern') && form.get('nombre').touched" class="text-danger error-labe">* Nombre invalido</span>
+        </div>
+        <div class="form-group mb-3">
+          <label class="formLabel" for="apellido">Apellido</label>
+          <input formControlName="apellido" type="text" class="form-control" id="apellido" placeholder="Perez">
+          <span *ngIf="form.get('apellido').hasError('required') && form.get('apellido').touched" class="text-danger error-labe">* Requerido</span>
+          <span *ngIf="form.get('apellido').hasError('pattern') && form.get('apellido').touched" class="text-danger error-labe">* Apellido invalido</span>
+        </div>
+        <div class="form-group mb-3">
+          <label class="formLabel" for="edad">Edad</label>
+          <input formControlName="edad" type="number" class="form-control" id="edad" min="18" max="99">
+          <span *ngIf="form.get('edad').hasError('required') && form.get('edad').touched" class="text-danger error-labe">* Requerido</span>
+          <span *ngIf="(form.get('edad').hasError('max') || form.get('edad').hasError('min')) && form.get('edad').touched" class="text-danger error-labe">* Edad invalida</span>
+        </div>
+        <div class="form-group mb-3">
+            <label class="formLabel" for="telefono">Telefono</label>
+            <input formControlName="telefono" type="text" class="form-control" id="telefono" placeholder="1188889999">
+            <span *ngIf="form.get('telefono').hasError('required') && form.get('telefono').touched" class="text-danger error-labe">* Requerido</span>
+            <span *ngIf="(form.get('telefono').hasError('maxlength') || form.get('telefono').hasError('pattern') || form.get('telefono').hasError('minlength')) && form.get('telefono').touched" class="text-danger error-labe">* El telefono debe tener 10 numeros</span>
+          </div>
+        <div class="form-group mb-3">
+          <label class="formLabel" for="ocupacion">Ocupacion</label>
+          <select formControlName="ocupacion" class="form-control" id="ocupacion">
+            <option value="">Elegir...</option>
+            <option [value]="'empleado'">Empleado</option>
+            <option [value]="'estudiante'">Estudiante</option>
+            <option [value]="'gamer'">Gamer</option>
+            <option [value]="'empresario'">Empresario</option>
+            <option [value]="'ni ni'">Ni Ni</option>
+          </select>
+          <span  *ngIf="form.get('ocupacion').hasError('required') && form.get('ocupacion').touched" class="text-danger error-labe">* Requerido</span>
+        </div>
+        <div class="form-group mb-3">
+            <label class="formLabel">Juego Favorito</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="favorito" id="exampleRadios1" value="Ahorcado" formControlName="favorito">
+                <label class="form-check-label" for="Ahorcado">
+                  Ahorcado
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="favorito" id="exampleRadios2" value="Preguntados" formControlName="favorito">
+                <label class="form-check-label" for="Preguntados">
+                  Preguntados
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="favorito" id="exampleRadios3" value="Mayor o Menor" formControlName="favorito">
+                <label class="form-check-label" for="Mayor o Menor">
+                  Mayor o Menor
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="favorito" id="exampleRadios3" value="Pong" formControlName="favorito">
+                <label class="form-check-label" for="Pong">
+                  Pong
+                </label>
+              </div>
+        </div>
+        <div class="form-group mb-3">
+            <label for="customRange3"  class="formLabel">Puntuacion de la pagina</label> <span class="puntaje" *ngIf="rangotouched">{{puntos}}⭐</span>
+            <input  formControlName="puntuacion" type="range" class="form-range" min="1" max="5" step="1" id="customRange3" [(ngModel)]="puntos" (change)="actualizarPuntos()">  
+            <span *ngIf="form.get('puntuacion').hasError('required') && form.get('puntuacion').touched" class="text-danger error-labe">* Requerido</span>
+        </div>
+        <div class="d-grid gap-2">
+            <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Enviar</button>
+        </div>
+      </form>
+</div>
+
+<div *ngIf="encuestaEnviada" class="container col-5 text-center">
+    <h1>Encuesta enviada con exito</h1>
+</div>
+

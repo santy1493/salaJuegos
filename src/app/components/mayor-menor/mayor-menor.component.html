@@ -1,12 +1,14 @@
 <div class="mayorMenorContainer">
+    <div class="puntaje">
+        <h1 class="puntajeH1">Intentos: 0  - Aciertos: {{ puntos }}</h1>
+    </div>
     <div class="cartasContainer">
         <img src="../../../assets/img/cartas/reverso.jpg" alt="" class="mazo">
         <img [src]="imgCartaActual" alt="" class="carta">
     </div>
-    <div class="puntosContainer">
-        Puntos: {{ puntos }}
+    <div class="controles">
+        <button *ngIf="!inicio" class="btn btn-primary" type="button" (click)="comenzar()">Comenzar</button>
+        <button *ngIf="inicio" class="btn btn-danger" type="button" (click)="menor()">Menor</button>
+        <button *ngIf="inicio" class="btn btn-success" type="button" (click)="mayor()" style="margin-left: 10px;">Mayor</button>
     </div>
-    <button *ngIf="!inicio" (click)="comenzar()">comenzar</button>
-    <button *ngIf="inicio" (click)="mayor()">mayor</button>
-    <button *ngIf="inicio" (click)="menor()">menor</button>
 </div>

@@ -5,6 +5,8 @@ import { Firestore, collection, addDoc, collectionData, doc, deleteDoc, query, w
 import { Observable } from 'rxjs';
 import { Log } from '../models/log';
 import { Mensaje } from '../models/mensaje';
+import { Usuario } from '../models/usuario';
+import { Encuesta } from '../models/encuesta';
 
 
 @Injectable({
@@ -29,9 +31,33 @@ export class FirestoreService {
   }
 
   obtenerMensajes(): Observable<Mensaje[]> {
-    console.log(this.firestore);
     const mensajesRef = collection(this.firestore, 'mensajes');
     return collectionData(mensajesRef, { idField: 'id'}) as Observable<Mensaje[]>;
+  }
+
+  agregarUsuario(usuario: Usuario) {
+    const usuarioRef = collection(this.firestore, 'usuarios');
+    return addDoc(usuarioRef, usuario).catch(err => {
+      console.log(err);
+    });
+  }
+
+  obtenerUsuario(email: string): Observable<Usuario[]> {
+    const usuarioRef = collection(this.firestore, 'usuarios');
+    const q = query(usuarioRef, where('email', '==', email));
+    return collectionData(q, { idField: 'id'}) as Observable<Usuario[]>;
+  }
+
+  agregarEncuesta(encuesta: Encuesta) {
+    const encuestaRef = collection(this.firestore, 'encuestas');
+    return addDoc(encuestaRef, encuesta).catch(err => {
+      console.log(err);
+    });
+  }
+
+  obtenerEncuestas(): Observable<Encuesta[]> {
+    const encuestaRef = collection(this.firestore, 'encuestas');
+    return collectionData(encuestaRef, { idField: 'id'}) as Observable<Encuesta[]>;
   }
 
   /*obtenerPublicaciones(): Observable<Publicacion[]> {

@@ -2,7 +2,7 @@
 <div class="ahorcadoContainer">
 
     <div class="ahorcadoDisplay">
-        <img [src]="ahorcadoImg" alt="" width="200px" style="border-radius: 10px;">
+        <img [src]="ahorcadoImg" alt="" height="90%" style="border-radius: 10px;">
         <h3 class="erroresRestantes" *ngIf="!perdido && !ganado">Errores restantes: {{ MAX_ERRORES - letraErroneas }}</h3>
     </div>
 

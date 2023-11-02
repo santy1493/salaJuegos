@@ -31,4 +31,19 @@ export class AuthService {
   register(email: string, password: string) {
     return createUserWithEmailAndPassword(this.afAuth, email, password);
   }
+
+  /*async getUserEmail(): Promise<string> {
+
+    let userEmail = '';
+    
+    await this.afAuth.onAuthStateChanged(user => {
+      if(user) {
+        userEmail = user.email;
+      }
+    });
+
+    return userEmail;
+  }*/
+
+
 }
