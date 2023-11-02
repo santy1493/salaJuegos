@@ -7,6 +7,9 @@ import { Log } from '../models/log';
 import { Mensaje } from '../models/mensaje';
 import { Usuario } from '../models/usuario';
 import { Encuesta } from '../models/encuesta';
+import { PuntajePreguntados } from '../models/puntaje-preguntados';
+import { PuntajeAhorcado } from '../models/puntaje-ahorcado';
+import { PuntajePong } from '../models/puntaje-pong';
 
 
 @Injectable({
@@ -59,6 +62,55 @@ export class FirestoreService {
     const encuestaRef = collection(this.firestore, 'encuestas');
     return collectionData(encuestaRef, { idField: 'id'}) as Observable<Encuesta[]>;
   }
+
+  agregarPuntajePreguntados(puntaje: PuntajePreguntados) {
+    const puntajeaRef = collection(this.firestore, 'preguntados');
+    return addDoc(puntajeaRef, puntaje).catch(err => {
+      console.log(err);
+    });
+  }
+
+  obtenerPuntajesPreguntados(): Observable<PuntajePreguntados[]> {
+    const puntajeaRef = collection(this.firestore, 'preguntados');
+    return collectionData(puntajeaRef, { idField: 'id'}) as Observable<PuntajePreguntados[]>;
+  }
+
+  agregarPuntajeMayorMenor(puntaje: PuntajePreguntados) {
+    const puntajeaRef = collection(this.firestore, 'mayor-menor');
+    return addDoc(puntajeaRef, puntaje).catch(err => {
+      console.log(err);
+    });
+  }
+
+  obtenerPuntajesMayorMenor(): Observable<PuntajePreguntados[]> {
+    const puntajeaRef = collection(this.firestore, 'mayor-menor');
+    return collectionData(puntajeaRef, { idField: 'id'}) as Observable<PuntajePreguntados[]>;
+  }
+
+  agregarPuntajeAhorcado(puntaje: PuntajeAhorcado) {
+    const puntajeaRef = collection(this.firestore, 'ahorcado');
+    return addDoc(puntajeaRef, puntaje).catch(err => {
+      console.log(err);
+    });
+  }
+
+  obtenerPuntajesAhorcado(): Observable<PuntajeAhorcado[]> {
+    const puntajeaRef = collection(this.firestore, 'ahorcado');
+    return collectionData(puntajeaRef, { idField: 'id'}) as Observable<PuntajeAhorcado[]>;
+  }
+
+  agregarPuntajePong(puntaje: PuntajePong) {
+    const puntajeaRef = collection(this.firestore, 'pong');
+    return addDoc(puntajeaRef, puntaje).catch(err => {
+      console.log(err);
+    });
+  }
+
+  obtenerPuntajesPong(): Observable<PuntajePong[]> {
+    const puntajeaRef = collection(this.firestore, 'pong');
+    return collectionData(puntajeaRef, { idField: 'id'}) as Observable<PuntajePong[]>;
+  }
+
 
   /*obtenerPublicaciones(): Observable<Publicacion[]> {
     const publicacionRef = collection(this.firestore, 'publicaciones');

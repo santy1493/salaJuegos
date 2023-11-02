@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { PuntajePreguntados } from 'src/app/models/puntaje-preguntados';
+import { AuthService } from 'src/app/services/auth.service';
+import { FirestoreService } from 'src/app/services/firestore.service';
 import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
@@ -6,7 +9,7 @@ import { ToastService } from 'src/app/services/toast.service';
   templateUrl: './mayor-menor.component.html',
   styleUrls: ['./mayor-menor.component.css']
 })
-export class MayorMenorComponent implements OnInit {
+export class MayorMenorComponent implements OnInit, OnDestroy {
 
   imgCartaActual: string;
   cartaAnterior: number;
@@ -66,7 +69,9 @@ export class MayorMenorComponent implements OnInit {
   ]
 
   constructor(
-    private toast: ToastService
+    private toast: ToastService,
+    private auth: AuthService,
+    private firestore: FirestoreService
   ) { }
 
   ngOnInit(): void {
@@ -75,6 +80,29 @@ export class MayorMenorComponent implements OnInit {
     this.inicio = false;
     this.esMayor = false;
     this.imgCartaActual = "";
+  }
+
+  ngOnDestroy(): void {
+    if(this.intentos > 0) {
+
+      var today = new Date();
+      var date = today.toLocaleString('en-GB');
+
+      this.auth.authState$.subscribe(res => {
+        let puntajeFinal: PuntajePreguntados = {
+          fecha: date,
+          usuario: res.email,
+          intentos: this.intentos,
+          puntaje: this.puntos
+        }
+        console.log(puntajeFinal);
+        this.firestore.agregarPuntajeMayorMenor(puntajeFinal);
+      });
+
+
+      
+    }
+    
   }
 
   comenzar() {
@@ -106,7 +134,8 @@ export class MayorMenorComponent implements OnInit {
       numCartaActual = this.getRandomIntInclusive()
     } while (numCartaActual == this.cartaAnterior);
     
-    console.log(numCartaActual);
+    //console.log(numCartaActual);
+    this.intentos++;
 
     let cartaActual = this.cartas.find(c => c.numero === numCartaActual);
     this.imgCartaActual = cartaActual.imagen;

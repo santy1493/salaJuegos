@@ -1,4 +1,7 @@
 .gameContainer {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(215, 183, 103);
     text-align: center;
 }
 
@@ -11,12 +14,39 @@
     font-size: 100px;
 }
 
+.botones {
+    width: 100%;
+    padding-top: 8px;
+    padding-bottom: 5px;
+}
+
+.botonesSv {
+    width: 100%;
+}
+
 .resetButton {
     font-family: "Permanent Marker", cursive;
     font-size: 22px;
-    width: 100px;
+    width: 130px;
     height: 50px;
     border: 4px solid;
     border-radius: 15px;
     cursor: pointer;
+}
+
+.tiempoButton {
+    font-family: "Permanent Marker", cursive;
+    font-size: 26px;
+    width: 280px;
+    height: 50px;
+    color: aliceblue;
+    background-color: blueviolet;
+    border: 4px solid blueviolet;
+    border-radius: 15px;
+    cursor: none;
+}
+
+.botonesTp {
+    width: 100%;
+    padding: 7px;
 }

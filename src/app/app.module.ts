@@ -28,20 +28,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { PreguntadosComponent } from './components/preguntados/preguntados.component';
 import { PongComponent } from './pong/pong.component';
 import { EncuestaComponent } from './components/encuesta/encuesta.component';
+import { RespuestasComponent } from './components/respuestas/respuestas.component';
+import { QuienSoyComponent } from './components/quien-soy/quien-soy.component';
+import { PuntajesComponent } from './components/puntajes/puntajes.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     HomeComponent,
-    RegistroComponent,
     ChatComponent,
-    MayorMenorComponent,
-    JuegosComponent,
-    AhorcadoComponent,
-    PreguntadosComponent,
-    PongComponent,
-    EncuestaComponent
+    QuienSoyComponent,
+    PuntajesComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,27 @@
+<div class="container table-responsive py-5 text-center">
+    <h1>Respuestas de Encuestas</h1>
+    <table class="table table-bordered py-4">
+        <thead>
+          <tr>
+            <th scope="col-2">Nombre</th>
+            <th scope="col-2">Apellido</th>
+            <th scope="col-1">Edad</th>
+            <th scope="col-2">Telefono</th>
+            <th scope="col-2">Ocupacion</th>
+            <th scope="col-2">Juego Favorito</th>
+            <th scope="col-1">Puntaje Pagina</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let respuesta of respuestas">
+            <td>{{ respuesta.nombre }}</td>
+            <td>{{ respuesta.apellido }}</td>
+            <td>{{ respuesta.edad }}</td>
+            <td>{{ respuesta.telefono }}</td>
+            <td>{{ respuesta.ocupacion }}</td>
+            <td>{{ respuesta.favorito }}</td>
+            <td>{{ respuesta.puntuacion }}⭐</td>
+          </tr>
+        </tbody>
+      </table>
+  </div>

@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Pelicula } from 'src/app/models/pelicula';
+import { PuntajePreguntados } from 'src/app/models/puntaje-preguntados';
+import { AuthService } from 'src/app/services/auth.service';
+import { FirestoreService } from 'src/app/services/firestore.service';
 import { PeliculasService } from 'src/app/services/peliculas.service';
 
 @Component({
@@ -7,18 +10,43 @@ import { PeliculasService } from 'src/app/services/peliculas.service';
   templateUrl: './preguntados.component.html',
   styleUrls: ['./preguntados.component.css']
 })
-export class PreguntadosComponent implements OnInit {
+export class PreguntadosComponent implements OnInit, OnDestroy {
 
   peliculas: Pelicula[];
   preguntaActual: any;
   puntaje: number;
+  intentos: number;
 
   constructor(
-    private peliculasService: PeliculasService
+    private peliculasService: PeliculasService,
+    private auth: AuthService,
+    private firestore: FirestoreService
   ) { }
+
+  ngOnDestroy(): void {
+    if(this.intentos > 0) {
+
+
+      this.auth.authState$.subscribe(res => {
+        let puntajeFinal: PuntajePreguntados = {
+          fecha: '23/05/2023',
+          usuario: res.email,
+          intentos: this.intentos,
+          puntaje: this.puntaje
+        }
+        console.log(puntajeFinal);
+        this.firestore.agregarPuntajePreguntados(puntajeFinal);
+      });
+
+
+      
+    }
+    
+  }
 
   ngOnInit(): void {
     this.puntaje = 0;
+    this.intentos = 0;
     this.peliculasService.getPeliculas().subscribe(res => {
       this.peliculas = res.results;
       console.log(this.peliculas);
@@ -57,6 +85,7 @@ export class PreguntadosComponent implements OnInit {
   }
 
   elegirOpcion(opcion: any) {
+    this.intentos++;
     if(opcion.titulo == this.preguntaActual.titulo) {
       opcion.correcto = true;
       this.preguntaActual.respondida = true;

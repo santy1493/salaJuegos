@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { PuntajeAhorcado } from 'src/app/models/puntaje-ahorcado';
+import { AuthService } from 'src/app/services/auth.service';
+import { FirestoreService } from 'src/app/services/firestore.service';
 
 @Component({
   selector: 'app-ahorcado',
@@ -7,7 +10,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AhorcadoComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private firestore: FirestoreService,
+    private auth: AuthService
+  ) { }
 
   palabra: string;
   ahorcadoImg: string = ''
@@ -96,6 +102,7 @@ export class AhorcadoComponent implements OnInit {
 
         if(this.letraErroneas == this.MAX_ERRORES) {
           this.perdido = true;
+          this.guardarResultado();
         }
 
         let quedanLetras = this.letrasPalabra.filter(l => l.adivinado == false);
@@ -105,6 +112,7 @@ export class AhorcadoComponent implements OnInit {
         }
         else {
           this.ganado = true;
+          this.guardarResultado();
           this.ahorcadoImg = '../../../assets/img/ahorcado/ahorcado_7.jpg';
         }
 
@@ -143,6 +151,22 @@ export class AhorcadoComponent implements OnInit {
       letraUsada.usado = true;
     }
     
+  }
+
+  guardarResultado() {
+    var today = new Date();
+      var date = today.toLocaleString('en-GB');
+
+      this.auth.authState$.subscribe(res => {
+        let puntajeFinal: PuntajeAhorcado = {
+          fecha: date,
+          usuario: res.email,
+          errores: this.letraErroneas,
+          ganado: this.ganado
+        }
+        console.log(puntajeFinal);
+        this.firestore.agregarPuntajeAhorcado(puntajeFinal);
+      });
   }
 
   reiniciarCaracteres(){

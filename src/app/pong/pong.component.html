@@ -1,5 +1,14 @@
-<div class="cameContainer">
-    <canvas #boardGame class="boardGame" width="500" height="500"></canvas>
-    <div class="scoreText">{{ scoreText }}</div>
-    <button class="resetButton" (click)="resetGame()">Reiniciar</button>
+<div class="gameContainer">
+    <div class="botonesTp">
+        <button class="tiempoButton" >Tiempo: {{ formatTime() }}</button>
+    </div>
+    <canvas #boardGame class="boardGame" width="490px" height="490px"></canvas>
+    <!--<div class="scoreText">{{ scoreText }}</div>-->
+    <div class="botones">
+        <button class="resetButton" (click)="resetGame()" *ngIf="!firstPlay">Reiniciar</button>
+        <button class="resetButton" (click)="gameStart()" *ngIf="firstPlay">Comenzar</button>
+    </div>
+    <div class="botonesSv">
+        <button class="resetButton" (click)="guardarResultado()" *ngIf="gameState == 'completed'">Guardar resultado</button>
+    </div>
 </div>

@@ -11,8 +11,11 @@ import { AhorcadoComponent } from './components/ahorcado/ahorcado.component';
 import { PreguntadosComponent } from './components/preguntados/preguntados.component';
 import { PongComponent } from './pong/pong.component';
 import { EncuestaComponent } from './components/encuesta/encuesta.component';
+import { RespuestasComponent } from './components/respuestas/respuestas.component';
+import { QuienSoyComponent } from './components/quien-soy/quien-soy.component';
+import { PuntajesComponent } from './components/puntajes/puntajes.component';
 
-const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['usuario/login']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
 
 const routes: Routes = [
@@ -22,22 +25,14 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   { 
-    path: 'login',
-    canActivate: [ AuthGuard ],
-    data: { authGuardPipe: redirectLoggedInToHome },
-    component: LoginComponent
-  },
-  { 
     path: 'home',
-    canActivate: [ AuthGuard ],
-    data: { authGuardPipe: redirectUnauthorizedToLogin },
     component: HomeComponent
   },
-  {
-    path: 'registro',
+  { 
+    path: 'quien-soy',
     canActivate: [ AuthGuard ],
-    data: { authGuardPipe: redirectLoggedInToHome },
-    component: RegistroComponent
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
+    component: QuienSoyComponent
   },
   {
     path: 'chat',
@@ -46,40 +41,31 @@ const routes: Routes = [
     component: ChatComponent
   },
   {
+    path: 'usuario',
+    canActivate: [ AuthGuard ],
+    data: { authGuardPipe: redirectLoggedInToHome },
+    loadChildren: () =>
+      import('./modules/login/login.module').then((m) => m.LoginModule),
+  },
+  {
     path: 'juegos',
     canActivate: [ AuthGuard ],
     data: { authGuardPipe: redirectUnauthorizedToLogin },
-    component: JuegosComponent
+    loadChildren: () =>
+      import('./modules/juegos/juegos.module').then((m) => m.JuegosModule),
   },
   {
-    path: 'mayor-menor',
+    path: 'encuestas',
     canActivate: [ AuthGuard ],
     data: { authGuardPipe: redirectUnauthorizedToLogin },
-    component: MayorMenorComponent
+    loadChildren: () =>
+      import('./modules/encuesta/encuesta.module').then((m) => m.EncuestaModule),
   },
   {
-    path: 'ahorcado',
+    path: 'puntajes',
     canActivate: [ AuthGuard ],
     data: { authGuardPipe: redirectUnauthorizedToLogin },
-    component: AhorcadoComponent
-  },
-  {
-    path: 'preguntados',
-    canActivate: [ AuthGuard ],
-    data: { authGuardPipe: redirectUnauthorizedToLogin },
-    component: PreguntadosComponent
-  },
-  {
-    path: 'pong',
-    canActivate: [ AuthGuard ],
-    data: { authGuardPipe: redirectUnauthorizedToLogin },
-    component: PongComponent
-  },
-  {
-    path: 'encuesta',
-    canActivate: [ AuthGuard ],
-    data: { authGuardPipe: redirectUnauthorizedToLogin },
-    component: EncuestaComponent
+    component: PuntajesComponent
   },
   { 
     path: '**',

@@ -56,10 +56,10 @@
 .ahorcadoContainer {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     width: 100%;
-    height: calc(100% - 70px);
+    height: calc(100% - 50px);
     background-color: rgb(217, 252, 179);
+    padding-top: 40px;
 }
 
 .ahorcadoDisplay {

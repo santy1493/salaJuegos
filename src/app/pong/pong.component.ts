@@ -1,4 +1,8 @@
 import { Component, ViewChild, ElementRef, AfterViewInit, HostListener } from '@angular/core';
+import { PuntajePong } from '../models/puntaje-pong';
+import { time } from 'console';
+import { AuthService } from '../services/auth.service';
+import { FirestoreService } from '../services/firestore.service';
 
 @Component({
   selector: 'app-pong',
@@ -8,6 +12,13 @@ import { Component, ViewChild, ElementRef, AfterViewInit, HostListener } from '@
 export class PongComponent implements AfterViewInit  {
 
   @ViewChild('boardGame', {static: false}) gameBoard: ElementRef<HTMLCanvasElement>;
+
+  constructor(
+    private auth: AuthService,
+    private firestore: FirestoreService
+  ) {
+
+  }
 
   context: CanvasRenderingContext2D;
   scoreText: string = '0 : 0';
@@ -33,6 +44,11 @@ export class PongComponent implements AfterViewInit  {
   player2Score;
   paddle1;
   paddle2;
+
+firstPlay = true;
+  interTime: any;
+  gameState = '';
+  timer = 0;
 
   ngAfterViewInit(): void {
     this.ctx = this.gameBoard.nativeElement.getContext('2d');
@@ -70,15 +86,38 @@ export class PongComponent implements AfterViewInit  {
 
     //window.addEventListener("keydown", this.changeDirection);
 
-    this.gameStart();
+    //this.gameStart();
+    this.clearBoard();
+    this.drawPaddles();
+
   }
 
 
   
   gameStart(){
-    
+
+    if(this.firstPlay) {
+        this.firstPlay = false;
+    }
+
+    this.gameState = 'init';
+    this.timer = 0;
     this.createBall();
     this.nextTick();
+
+    this.interTime = setInterval(() => {
+        if(this.gameState == 'init') {
+          this.timer++;
+        }
+        else if(this.gameState == 'load') {
+          
+        }
+        else {
+          clearInterval(this.interTime);
+          this.interTime = null;
+        }
+      }, 1000);
+
   };
   
   nextTick(){
@@ -152,14 +191,16 @@ export class PongComponent implements AfterViewInit  {
       }
       if(this.ballX <= 0){
           this.player2Score+=1;
-          this.updateScore();
-          this.createBall();
+          this.gameState = 'completed';
+          /*this.updateScore();
+          this.createBall();*/
           return;
       }
       if(this.ballX >= this.gameWidth){
           this.player1Score+=1;
-          this.updateScore();
-          this.createBall();
+          this.gameState = 'completed';
+          /*this.updateScore();
+          this.createBall();*/
           return;
       }
       if(this.ballX <= (this.paddle1.x + this.paddle1.width + this.ballRadius)){
@@ -183,8 +224,10 @@ export class PongComponent implements AfterViewInit  {
       const keyPressed = event.keyCode;
       const paddle1Up = 87;
       const paddle1Down = 83;
-      const paddle2Up = 38;
-      const paddle2Down = 40;
+      //const paddle2Up = 38;
+      //const paddle2Down = 40;
+      const paddle2Up = 80;
+      const paddle2Down = 76;
 
       switch(keyPressed){
           case(paddle1Up):
@@ -240,5 +283,35 @@ export class PongComponent implements AfterViewInit  {
   };
 
 
+
+formatTime() {
+  let minutes = Math.floor(this.timer / 60);
+  let seconds = this.timer - minutes * 60;
+
+  return (minutes < 10 ? '0' + minutes : minutes) + ':' +(seconds < 10 ? '0' + seconds : seconds);
+}
+
+formatTimeParam(time: number) {
+  let minutes = Math.floor(time / 60);
+  let seconds = time - minutes * 60;
+
+  return (minutes < 10 ? '0' + minutes : minutes) + ':' +(seconds < 10 ? '0' + seconds : seconds);
+}
+
+guardarResultado() {
+    var today = new Date();
+      var date = today.toLocaleString('en-GB');
+
+      this.auth.authState$.subscribe(res => {
+        let puntajeFinal: PuntajePong = {
+          fecha: date,
+          usuario: res.email,
+          tiempo: this.timer
+        }
+        console.log(puntajeFinal);
+        this.firestore.agregarPuntajePong(puntajeFinal);
+        this.gameState = 'saved';
+      });
+  }
 
 }

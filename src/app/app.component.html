@@ -7,11 +7,13 @@
             </a>-->
       
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-              <li><a class="nav-link px-2 text-secondary" routerLink="/home">Home</a></li>
+              <li><a class="nav-link px-2 text-white" routerLink="/home">Home</a></li>
+              <li><a class="nav-link px-2 text-white" routerLink="/quien-soy">Quien Soy</a></li>
               <li><a class="nav-link px-2 text-white" routerLink="/chat">Chat</a></li>
               <li><a class="nav-link px-2 text-white" routerLink="/juegos">Juegos</a></li>
-              <li><a class="nav-link px-2 text-white" routerLink="/encuesta">Encuesta</a></li>
-              <li *ngIf="esAdmin"><a class="nav-link px-2 text-white" routerLink="/encuesta">Respuestas</a></li>
+              <li><a class="nav-link px-2 text-white" routerLink="/puntajes">Puntajes</a></li>
+              <li><a class="nav-link px-2 text-white" routerLink="/encuestas/encuesta">Encuesta</a></li>
+              <li *ngIf="esAdmin"><a class="nav-link px-2 text-white" routerLink="/encuestas/respuestas">Respuestas</a></li>
             </ul>
       
             <!--<form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
@@ -26,8 +28,8 @@
           
           <ng-template #other_content>
             <div class="text-end">
-              <button type="button" class="btn btn-outline-light me-2" routerLink="/login">Login</button>
-              <button type="button" class="btn btn-warning" routerLink="/registro">Registrarse</button>
+              <button type="button" class="btn btn-outline-light me-2" routerLink="/usuario/login">Login</button>
+              <button type="button" class="btn btn-warning" routerLink="/usuario/registro">Registrarse</button>
             </div>
           </ng-template>
             

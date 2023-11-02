@@ -1,0 +1,103 @@
+<div class="container">
+    <div class="row">
+        <div class="col-3 py-5">
+            <div class="d-grid gap-2 col-6 my-3 mx-auto">
+                <button class="btn btn-secondary" type="button" (click)="cambiarTabla(1)">Ahorcado</button>
+            </div>
+            <div class="d-grid gap-2 col-6 my-3 mx-auto">
+                <button class="btn btn-secondary" type="button" (click)="cambiarTabla(2)">Mayor o Menor</button>
+            </div>
+            <div class="d-grid gap-2 col-6 my-3 mx-auto">
+                <button class="btn btn-secondary" type="button" (click)="cambiarTabla(3)">Preguntados</button>
+            </div>
+            <div class="d-grid gap-2 col-6 my-3 mx-auto">
+                <button class="btn btn-secondary" type="button" (click)="cambiarTabla(4)">Pong</button>
+            </div>
+        </div>
+        <div class="col-9 table-responsive py-5 text-center" *ngIf="ahorcado">
+            <h1>Ahorcado</h1>
+            <table class="table table-bordered py-4">
+                <thead>
+                  <tr>
+                    <th scope="col-2">Fecha</th>
+                    <th scope="col-2">Usuario</th>
+                    <th scope="col-1">Resultado</th>
+                    <th scope="col-2">Letras Erroneas</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let punAh of puntajesAhorcado">
+                    <td>{{ punAh.fecha }}</td>
+                    <td>{{ punAh.usuario }}</td>
+                    <td>{{ punAh.ganado ? 'Ganado' : 'Perdido' }}</td>
+                    <td>{{ punAh.errores }}</td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+
+        <div class="col-9 table-responsive py-5 text-center" *ngIf="mayorMenor">
+            <h1>Mayor o Menor</h1>
+            <table class="table table-bordered py-4">
+                <thead>
+                  <tr>
+                    <th scope="col-2">Fecha</th>
+                    <th scope="col-2">Usuario</th>
+                    <th scope="col-1">Puntaje</th>
+                    <th scope="col-2">Intentos</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let punAh of puntajesMayorMenor">
+                    <td>{{ punAh.fecha }}</td>
+                    <td>{{ punAh.usuario }}</td>
+                    <td>{{ punAh.puntaje }}</td>
+                    <td>{{ punAh.intentos }}</td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+
+          <div class="col-9 table-responsive py-5 text-center" *ngIf="preguntados">
+            <h1>Preguntados</h1>
+            <table class="table table-bordered py-4">
+                <thead>
+                  <tr>
+                    <th scope="col-2">Fecha</th>
+                    <th scope="col-2">Usuario</th>
+                    <th scope="col-1">Puntaje</th>
+                    <th scope="col-2">Intentos</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let punAh of puntajesPreguntados">
+                    <td>{{ punAh.fecha }}</td>
+                    <td>{{ punAh.usuario }}</td>
+                    <td>{{ punAh.puntaje }}</td>
+                    <td>{{ punAh.intentos }}</td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+
+          <div class="col-9 table-responsive py-5 text-center" *ngIf="pong">
+            <h1>Pong</h1>
+            <table class="table table-bordered py-4">
+                <thead>
+                  <tr>
+                    <th scope="col-2">Fecha</th>
+                    <th scope="col-2">Usuario</th>
+                    <th scope="col-1">Tiempo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let punAh of puntajesPong">
+                    <td>{{ punAh.fecha }}</td>
+                    <td>{{ punAh.usuario }}</td>
+                    <td>{{ formatTime(punAh.tiempo) }}</td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+    </div>
+</div>

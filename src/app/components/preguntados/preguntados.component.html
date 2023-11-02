@@ -1,9 +1,9 @@
 <div class="preguntadosContainer">
   <div class="juegoContainer">
     <div class="d-grid gap-2 col-6 mx-auto puntaje" >
-      <h1 class="puntajeH1">Intentos: 0  - Aciertos: {{ puntaje }}</h1>
+      <h1 class="puntajeH1">Intentos: {{ intentos }}  - Aciertos: {{ puntaje }}</h1>
   </div>
-    <div class="d-grid gap-2 col-6 mx-auto" style="background-color: white; height: 50%; border-radius: 20px; margin-bottom: 20px;">
+    <div class="d-grid gap-2 col-6 mx-auto" style="background-color: white; height: 42%; border-radius: 20px; margin-bottom: 10px;">
       <div class="text-center" style="margin: 30px auto;">
           <img [src]="'https://image.tmdb.org/t/p/w500' + preguntaActual.imagen" class="peliculaImg rounded" alt="...">
           <h2>¿Cual es el nombre de la pelicula?</h2>
@@ -28,8 +28,8 @@
           >{{ opcion.titulo }}</button>
         </div>
       
-        <div class="d-grid gap-2 col-1 mx-auto" *ngIf="preguntaActual.respondida" style="margin-top: 30px;">
-          <button class="btn btn-warning" type="button" (click)="elegirPelicula()">Siguiente</button>
+        <div class="d-grid gap-2 col-2 mx-auto" *ngIf="preguntaActual.respondida" style="margin-top: 8px;">
+          <button class="btn btn-primary" type="button" (click)="elegirPelicula()">Siguiente</button>
         </div>
   </div>
       
